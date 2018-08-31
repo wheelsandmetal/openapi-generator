@@ -34,7 +34,7 @@ void main() {
       await petApi.addPet(new Pet()
         ..id = id
         ..name = 'Snowy');
-      await petApi.updatePetWithForm(id, name: 'Doge', status: '');
+      await petApi.updatePetWithForm(id, name: 'Doge', status: 'available');
       var pet = await petApi.getPetById(id);
       expect(pet.name, equals('Doge'));
     });
