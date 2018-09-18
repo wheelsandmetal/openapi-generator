@@ -18,7 +18,11 @@ def add_pet(pet):  # noqa: E501
     """
     if connexion.request.is_json:
         pet = Pet.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.pet_controller import add_pet as func
+        return func(pet)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def delete_pet(pet_id, api_key=None):  # noqa: E501
@@ -33,7 +37,11 @@ def delete_pet(pet_id, api_key=None):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.pet_controller import delete_pet as func
+        return func(pet_id, api_key)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def find_pets_by_status(status):  # noqa: E501
@@ -46,7 +54,11 @@ def find_pets_by_status(status):  # noqa: E501
 
     :rtype: List[Pet]
     """
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.pet_controller import find_pets_by_status as func
+        return func(status)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def find_pets_by_tags(tags):  # noqa: E501
@@ -59,7 +71,11 @@ def find_pets_by_tags(tags):  # noqa: E501
 
     :rtype: List[Pet]
     """
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.pet_controller import find_pets_by_tags as func
+        return func(tags)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def get_pet_by_id(pet_id):  # noqa: E501
@@ -72,7 +88,11 @@ def get_pet_by_id(pet_id):  # noqa: E501
 
     :rtype: Pet
     """
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.pet_controller import get_pet_by_id as func
+        return func(pet_id)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def update_pet(pet):  # noqa: E501
@@ -87,7 +107,11 @@ def update_pet(pet):  # noqa: E501
     """
     if connexion.request.is_json:
         pet = Pet.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.pet_controller import update_pet as func
+        return func(pet)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def update_pet_with_form(pet_id, name=None, status=None):  # noqa: E501
@@ -104,7 +128,11 @@ def update_pet_with_form(pet_id, name=None, status=None):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.pet_controller import update_pet_with_form as func
+        return func(pet_id, name, status)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def upload_file(pet_id, additional_metadata=None, file=None):  # noqa: E501
@@ -121,4 +149,8 @@ def upload_file(pet_id, additional_metadata=None, file=None):  # noqa: E501
 
     :rtype: ApiResponse
     """
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.pet_controller import upload_file as func
+        return func(pet_id, additional_metadata, file)
+    except AttributeError:
+        return 'do some magic!'

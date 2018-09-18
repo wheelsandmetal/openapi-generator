@@ -17,7 +17,11 @@ def create_user(user):  # noqa: E501
     """
     if connexion.request.is_json:
         user = User.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.user_controller import create_user as func
+        return func(user)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def create_users_with_array_input(user):  # noqa: E501
@@ -32,7 +36,11 @@ def create_users_with_array_input(user):  # noqa: E501
     """
     if connexion.request.is_json:
         user = [User.from_dict(d) for d in connexion.request.get_json()]  # noqa: E501
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.user_controller import create_users_with_array_input as func
+        return func(user)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def create_users_with_list_input(user):  # noqa: E501
@@ -47,7 +55,11 @@ def create_users_with_list_input(user):  # noqa: E501
     """
     if connexion.request.is_json:
         user = [User.from_dict(d) for d in connexion.request.get_json()]  # noqa: E501
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.user_controller import create_users_with_list_input as func
+        return func(user)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def delete_user(username):  # noqa: E501
@@ -60,7 +72,11 @@ def delete_user(username):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.user_controller import delete_user as func
+        return func(username)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def get_user_by_name(username):  # noqa: E501
@@ -73,7 +89,11 @@ def get_user_by_name(username):  # noqa: E501
 
     :rtype: User
     """
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.user_controller import get_user_by_name as func
+        return func(username)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def login_user(username, password):  # noqa: E501
@@ -88,7 +108,11 @@ def login_user(username, password):  # noqa: E501
 
     :rtype: str
     """
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.user_controller import login_user as func
+        return func(username, password)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def logout_user():  # noqa: E501
@@ -99,7 +123,11 @@ def logout_user():  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.user_controller import logout_user as func
+        return func()
+    except AttributeError:
+        return 'do some magic!'
 
 
 def update_user(username, user):  # noqa: E501
@@ -116,4 +144,8 @@ def update_user(username, user):  # noqa: E501
     """
     if connexion.request.is_json:
         user = User.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.user_controller import update_user as func
+        return func(username, user)
+    except AttributeError:
+        return 'do some magic!'

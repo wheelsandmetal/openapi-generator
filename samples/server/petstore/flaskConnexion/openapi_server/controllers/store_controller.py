@@ -15,7 +15,11 @@ def delete_order(order_id):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.store_controller import delete_order as func
+        return func(order_id)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def get_inventory():  # noqa: E501
@@ -26,7 +30,11 @@ def get_inventory():  # noqa: E501
 
     :rtype: Dict[str, int]
     """
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.store_controller import get_inventory as func
+        return func()
+    except AttributeError:
+        return 'do some magic!'
 
 
 def get_order_by_id(order_id):  # noqa: E501
@@ -39,7 +47,11 @@ def get_order_by_id(order_id):  # noqa: E501
 
     :rtype: Order
     """
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.store_controller import get_order_by_id as func
+        return func(order_id)
+    except AttributeError:
+        return 'do some magic!'
 
 
 def place_order(order):  # noqa: E501
@@ -54,4 +66,8 @@ def place_order(order):  # noqa: E501
     """
     if connexion.request.is_json:
         order = Order.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    try:
+        from openapi_server.overwrite_controllers.store_controller import place_order as func
+        return func(order)
+    except AttributeError:
+        return 'do some magic!'

@@ -107,6 +107,10 @@ def {{operationId}}({{#allParams}}{{paramName}}{{^required}}=None{{/required}}{{
             {{/items}}
         {{/isMapContainer}}
     {{/allParams}}
-    return 'do some magic!'
+    try:
+        from {{packageName}}.{{controllerOverwritePackage}}.{{classFilename}} import {{operationId}} as func
+        return func({{#allParams}}{{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}})
+    except AttributeError:
+        return 'do some magic!'
 {{/operation}}
 {{/operations}}

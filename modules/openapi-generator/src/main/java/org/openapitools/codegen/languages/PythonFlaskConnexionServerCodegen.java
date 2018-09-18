@@ -39,6 +39,7 @@ public class PythonFlaskConnexionServerCodegen extends DefaultCodegen implements
     private static final Logger LOGGER = LoggerFactory.getLogger(PythonFlaskConnexionServerCodegen.class);
 
     public static final String CONTROLLER_PACKAGE = "controllerPackage";
+    public static final String CONTROLLER_OVERWRITE_PACKAGE = "controllerOverwritePackage";
     public static final String DEFAULT_CONTROLLER = "defaultController";
     public static final String SUPPORT_PYTHON2 = "supportPython2";
 
@@ -46,6 +47,7 @@ public class PythonFlaskConnexionServerCodegen extends DefaultCodegen implements
     protected String packageName;
     protected String packageVersion;
     protected String controllerPackage;
+    protected String controllerOverwritePackage;
     protected String defaultController;
     protected Map<Character, String> regexModifiers;
 
@@ -142,6 +144,8 @@ public class PythonFlaskConnexionServerCodegen extends DefaultCodegen implements
                 .defaultValue("1.0.0"));
         cliOptions.add(new CliOption(CONTROLLER_PACKAGE, "controller package").
                 defaultValue("controllers"));
+        cliOptions.add(new CliOption(CONTROLLER_OVERWRITE_PACKAGE, "controller overwrite package").
+                defaultValue("overwrite_controllers"));
         cliOptions.add(new CliOption(DEFAULT_CONTROLLER, "default controller").
                 defaultValue("default_controller"));
         cliOptions.add(new CliOption(SUPPORT_PYTHON2, "support python2").
@@ -173,6 +177,14 @@ public class PythonFlaskConnexionServerCodegen extends DefaultCodegen implements
             this.controllerPackage = "controllers";
             additionalProperties.put(CONTROLLER_PACKAGE, this.controllerPackage);
         }
+
+        if (additionalProperties.containsKey(CONTROLLER_OVERWRITE_PACKAGE)) {
+            this.controllerOverwritePackage = additionalProperties.get(CONTROLLER_OVERWRITE_PACKAGE).toString();
+        } else {
+            this.controllerOverwritePackage = "overwrite_controllers";
+            additionalProperties.put(CONTROLLER_OVERWRITE_PACKAGE, this.controllerOverwritePackage);
+        }
+
         if (additionalProperties.containsKey(DEFAULT_CONTROLLER)) {
             this.defaultController = additionalProperties.get(DEFAULT_CONTROLLER).toString();
         } else {
@@ -188,6 +200,7 @@ public class PythonFlaskConnexionServerCodegen extends DefaultCodegen implements
         supportingFiles.add(new SupportingFile("encoder.mustache", packageName, "encoder.py"));
         supportingFiles.add(new SupportingFile("util.mustache", packageName, "util.py"));
         supportingFiles.add(new SupportingFile("__init__.mustache", packageName + File.separatorChar + controllerPackage, "__init__.py"));
+        supportingFiles.add(new SupportingFile("__init__.mustache", packageName + File.separatorChar + controllerOverwritePackage, "__init__.py"));
         supportingFiles.add(new SupportingFile("__init__model.mustache", packageName + File.separatorChar + modelPackage, "__init__.py"));
         supportingFiles.add(new SupportingFile("base_model_.mustache", packageName + File.separatorChar + modelPackage, "base_model_.py"));
         supportingFiles.add(new SupportingFile("__init__test.mustache", packageName + File.separatorChar + testPackage, "__init__.py"));
@@ -195,6 +208,7 @@ public class PythonFlaskConnexionServerCodegen extends DefaultCodegen implements
 
         modelPackage = packageName + "." + modelPackage;
         controllerPackage = packageName + "." + controllerPackage;
+        controllerOverwritePackage = packageName + "." + controllerOverwritePackage;
         testPackage = packageName + "." + testPackage;
     }
 

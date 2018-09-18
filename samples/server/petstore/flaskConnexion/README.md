@@ -35,6 +35,11 @@ To launch the integration tests, use tox:
 sudo pip install tox
 tox
 ```
+## Overwriting Controllers
+
+To overwrite a specific method, FOO, in the controller, BAR_controller, 
+create a method named FOO in a python file named BAR_controller.py in the 
+overwrite_controllers directory
 
 ## Running with Docker
 
