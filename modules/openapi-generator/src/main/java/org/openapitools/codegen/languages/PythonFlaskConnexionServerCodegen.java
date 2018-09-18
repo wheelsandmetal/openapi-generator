@@ -93,7 +93,8 @@ public class PythonFlaskConnexionServerCodegen extends DefaultCodegen implements
                         "and", "del", "from", "not", "while", "as", "elif", "global", "or", "with",
                         "assert", "else", "if", "pass", "yield", "break", "except", "import",
                         "print", "class", "exec", "in", "raise", "continue", "finally", "is",
-                        "return", "def", "for", "lambda", "try", "self", "None", "True", "False", "nonlocal"));
+                        "return", "def", "for", "lambda", "try", "self", "None", "True", "False", "nonlocal",
+                        "aysnc", "await"));
 
         // set the output folder here
         outputFolder = "generated-code/connexion";
